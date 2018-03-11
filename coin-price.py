@@ -5,10 +5,14 @@ import urllib.request
 from requests import HTTPError
 import ast
 import json
-from gevent.wsgi import WSGIServer
+
+from gevent import monkey
+from gevent.pywsgi import WSGIServer
+from geventwebsocket.handler import WebSocketHandler
+
+monkey.patch_all()
+
 app = Flask(__name__)
-
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -90,5 +94,8 @@ def getHtml(restUri,PostParam):
         return getHtml(restUri,PostParam)
 
 if __name__ == '__main__':
-    WSGIServer(('0.0.0.0',80), app).serve_forever()
+    #WSGIServer(('0.0.0.0',5000), app).serve_forever()
     #app.run(host='0.0.0.0')
+
+    http_server = WSGIServer(('0.0.0.0', 5000), app, handler_class=WebSocketHandler)
+    http_server.serve_forever()
