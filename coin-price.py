@@ -89,4 +89,4 @@ def getHtml(restUri,PostParam):
         return getHtml(restUri,PostParam)
 
 if __name__ == '__main__':
-    app.run()
+    app.run('0.0.0.0')

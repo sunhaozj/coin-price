@@ -257,8 +257,8 @@
                           <th colspan="2">Bithumb</th>
                         </tr>
                         <tr>
-                          <th>sell(卖)</th>
                           <th>buy(买)</th>
+                          <th>sell(卖)</th>
                           <th>KRW(韩元)</th>
                           <th>CNY(人民币)</th>
                           <th hidden></th>
@@ -270,8 +270,8 @@
                       <tr>
                         <td>BTC</td>
                         <td><span v-text="bitfinex.btc"></span></td>
+                        <td><code><span v-text="huobi.buy.btc"></span></code></td>
                         <td><span v-text="huobi.sell.btc"></span></td>
-                        <td><span v-text="huobi.buy.btc"></span></td>
                         <td><code><span v-text="bithumb.btc.krw"></span></code></td>
                         <td><span v-text="bithumb.btc.cny"></span></td>
                         <td hidden></td>
@@ -279,8 +279,8 @@
                         <tr>
                           <td>ETH</td>
                           <td><span v-text="bitfinex.eth"></span></td>
+                          <td><code><span v-text="huobi.buy.eth"></span></code></td>
                           <td><span v-text="huobi.sell.eth"></span></td>
-                          <td><span v-text="huobi.buy.eth"></span></td>
                           <td><code><span v-text="bithumb.eth.krw"></span></code></td>
                           <td><span v-text="bithumb.eth.cny"></span></td>
                           <td hidden></td>
