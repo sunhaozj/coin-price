@@ -5,6 +5,7 @@ import urllib.request
 from requests import HTTPError
 import ast
 import json
+from gevent.wsgi import WSGIServer
 app = Flask(__name__)
 
 
@@ -89,4 +90,5 @@ def getHtml(restUri,PostParam):
         return getHtml(restUri,PostParam)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=80)
+    WSGIServer(('0.0.0.0',80), app).serve_forever()
+    #app.run(host='0.0.0.0')
