@@ -109,7 +109,7 @@ var vm = new Vue({
                     data = res.bithumb
                     vm.bithumb.btc.krw = data.price.BTC
                     vm.bithumb.eth.krw = data.price.ETH
-                    if(vm.bithumb.rate.usdToCny != 1){
+                    if(vm.bithumb.rate.cnyToKrw != 1){
                          vm.bithumb.btc.cny = (vm.bithumb.btc.krw/vm.bithumb.rate.cnyToKrw).toFixed(3)
                          vm.bithumb.eth.cny = (vm.bithumb.eth.krw/vm.bithumb.rate.cnyToKrw).toFixed(3)
                     }
