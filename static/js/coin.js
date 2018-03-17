@@ -74,6 +74,7 @@ var vm = new Vue({
             $.ajax({
                 type: "GET",
                 url: "https://api-otc.huobipro.com/v1/otc/trade/list/public?" + param,
+                timeout : 3000,
                 contentType: "application/json",
                 success: function (res) {
                     data = res.data
@@ -82,7 +83,13 @@ var vm = new Vue({
                         vm.huobi.sell.usdt = data[4]["fixedPrice"]
                     if (type == "buy")
                         vm.huobi.buy.usdt = data[4]["fixedPrice"]
-                }
+                },
+                complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+　　　　            if(status=='timeout'){//超时,status还有success,error等值的情况
+　　　　　               vm.huobi.sell.usdt = 1
+                        vm.huobi.buy.usdt = 1
+　　　　             }
+　　             }
             });
         },
         bithumbRate: function () {
