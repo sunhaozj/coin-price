@@ -38,8 +38,14 @@ var vm = new Vue({
         username:"sunhao",
         title:"实时价格",
         bitfinex:{
-            btc:"pending...",
-            eth:"pending..."
+            btc:{
+                "cny":"pending...",
+                "usd":"pending..."
+            },
+            eth:{
+                "cny":"pending...",
+                "usd":"pending..."
+            }
         },
         huobi:{
             sell:{
@@ -236,10 +242,12 @@ function bitfinexOnMessage(evt) {
         //console.error(JSON.stringify(symbolChanneId))
         if(jsondata.length == 2 && jsondata[1].length > 7){
             if(jsondata[0] == symbolChanneId["tETHUSD"]){
-                vm.bitfinex.eth = (jsondata[1][6]*vm.bithumb.rate.usdToCny).toFixed(3)
+                vm.bitfinex.eth.usd = jsondata[1][6]
+                vm.bitfinex.eth.cny = (jsondata[1][6]*vm.bithumb.rate.usdToCny).toFixed(3)
             }
             if(jsondata[0] == symbolChanneId["tBTCUSD"]){
-                vm.bitfinex.btc = (jsondata[1][6]*vm.bithumb.rate.usdToCny).toFixed(3)
+                vm.bitfinex.btc.usd = jsondata[1][6]
+                vm.bitfinex.btc.cny = (jsondata[1][6]*vm.bithumb.rate.usdToCny).toFixed(3)
             }
         }
     }
@@ -264,8 +272,10 @@ function bitfinexOnError(evt) {
                 contentType: "application/json",
                 success: function (res) {
                     if(res.Bitfinex.btc != undefined){
-                        vm.bitfinex.btc = (res.Bitfinex.btc*vm.bithumb.rate.usdToCny).toFixed(3)
-                        vm.bitfinex.eth = (res.Bitfinex.eth*vm.bithumb.rate.usdToCny).toFixed(3)
+                        vm.bitfinex.btc.usd = res.Bitfinex.btc
+                        vm.bitfinex.btc.cny = (res.Bitfinex.btc*vm.bithumb.rate.usdToCny).toFixed(3)
+                        vm.bitfinex.eth.usd = res.Bitfinex.eth
+                        vm.bitfinex.eth.cny = (res.Bitfinex.eth*vm.bithumb.rate.usdToCny).toFixed(3)
                     }
                 }
             });
