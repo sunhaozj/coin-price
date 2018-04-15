@@ -1,13 +1,13 @@
 /**
  * Created by sunhao on 2018/3/3.
  */
-var bitfinexWsUri = "wss://api.bitfinex.com/ws/2"
+var bitfinexWsUri = "wss://api.bitfinex.com/ws"
 var huobiWsUrl = "wss://api.huobipro.com/ws"
 var symbolChanneId = {}
 
 $(function () {
-    vm.huobiUsdtPrice("coinId=2&tradeType=1&currentPage=1&payWay=&country=&merchant=1&online=1&range=0","buy")
-    vm.huobiUsdtPrice("coinId=2&tradeType=0&currentPage=1&payWay=&country=&merchant=0&online=1&range=0","sell")
+    vm.huobiUsdtPrice("country=37&currency=1&payMethod=0&currPage=1&coinId=2&tradeType=1&merchant=1&online=1","buy")
+    vm.huobiUsdtPrice("country=37&currency=1&payMethod=0&currPage=1&coinId=2&tradeType=0&merchant=1&online=1","sell")
     vm.bithumbRate()
     vm.bithumbPrice()
 
@@ -79,7 +79,7 @@ var vm = new Vue({
         huobiUsdtPrice: function (param, type) {
             $.ajax({
                 type: "GET",
-                url: "https://api-otc.huobipro.com/v1/otc/trade/list/public?" + param,
+                url: "https://otc-api.huobi.br.com/v1/otc/trade/list/public?" + param,
                 timeout : 3000,
                 contentType: "application/json",
                 success: function (res) {
